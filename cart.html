@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/af4c617f04.js" crossorigin="anonymous"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <title>Cart</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 17px;
+            padding: 8px;
+            background-color: #353535;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            gap: 20px;
+            padding: 20px;
+            background-color: #353535;
+        }
+
+        .cart-details {
+            flex: 3; /* 70% width */
+            background-color: rgb(243, 243, 243);
+            padding: 20px;
+            border: 1px solid bisque;
+            border-radius: 5px;
+        }
+
+        .toggle-buttons {
+            flex: 7; /* 30% width */
+            background-color: rgb(243, 243, 243);
+            padding: 20px;
+            border: 1px solid bisque;
+            border-radius: 5px;
+        }
+
+        input[type=text], input[type=email] {
+            width: 80%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            align-self: center;
+            text-align: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .button {
+            border: none;
+            border-radius: 5px;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: rgb(20, 20, 20);
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .button:hover {
+            opacity: 0.7;
+        }
+
+        .text1 {
+            text-align: center;
+            font-size: 28px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: white;
+        }
+
+        .text2 {
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+            color: white;
+        }
+
+        .form-container {
+            display: none;
+            margin: auto;
+        }
+
+        .form-container.show {
+            display: block;
+            margin: auto;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+                margin: auto;
+            }
+            .cart-details, .toggle-buttons {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div style="float: left; margin-left: 20px; margin-top: 20px; padding: 10px;">
+            <a href="index.html" style="font-size: medium; color: white;">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+    </section>
+    <section style="background-color: rgb(61, 61, 61); padding-top: 10px; padding-bottom: 10px;">
+        <h1 class="text1">Cart</h1>
+        <h3 class="text2">Check Added Items Here</h3>
+        <p class="text2">Or View Pending Orders Here<hr>
+            <a href="admin_panel.html"><button class="button">View Pending Orders.....</button></a>
+        </p>
+    </section>
+    <!-------------Where cart products should display when added to cart--------------->
+    <section style="background-color: white;">
+      <p class="text1"> Cart Products</p>
+    </section>
+    <section>
+        <div class="container">
+            <div class="cart-details">
+                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>0</b></span></h4>
+                <div id="cart-items">
+                    <!-- Items will be dynamically populated here -->
+                </div>
+                <hr>
+                <p>Total <span class="price"  style="color:black"><b>$0.00</b></span></p>
+            </div>
+            
+
+            <div class="toggle-buttons">
+                <h2 style="text-align: center; font-size: larger; font-family: Verdana, Geneva, Tahoma, sans-serif;">BizT Checkout Form</h2>
+                <p style="text-align: center; font-size: larger; font-family: Verdana, Geneva, Tahoma, sans-serif;">Complete The Following Information To Complete Your Order....</p>
+
+                <!-- Container for toggle buttons -->
+                <div class="toggle-container">
+                    <button class="btn toggle-btn" onclick="showForm('checkout')">Show Checkout Form</button>
+                    <button class="btn toggle-btn" onclick="showForm('delivery')">Pay on Delivery Option</button>
+                </div>
+
+                <div id="checkout-form" class="form-container">
+                    <form id="checkout-form-content">
+                        <div class="row">
+                            <div class="col-50">
+                                <!-- Product Details -->
+                                <input type="hidden" name="productName" value="Product Name">
+                                <input type="hidden" name="productPrice" value="Product Price">
+                                <input type="hidden" name="productColor" value="Product Color">
+                                <input type="hidden" name="productDescription"value="Product Color">
+
+                                <h3>Billing Address</h3>
+                                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                                <input type="text" id="fname" name="firstname" placeholder="John M. Doe" required>
+                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                                <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                                <label for="city"><i class="fa fa-institution"></i> City</label>
+                                <input type="text" id="city" name="city" placeholder="New York" required>
+
+                                <div class="row">
+                                    <div class="col-50">
+                                        <label for="state">State</label>
+                                        <input type="text" id="state" name="state" placeholder="NY" required>
+                                    </div>
+                                    <div class="col-50">
+                                        <label for="zip">Zip</label>
+                                        <input type="text" id="zip" name="zip" placeholder="10001" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label>
+                            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                        </label>
+                        <div>
+                            <h3>Total Amount: <span id="total-amount">$30.00</span></h3>
+                        </div>
+                        <button type="button" onclick="payWithPaystack(); handleSubmit();" class="btn">Submit Order</button>
+                    </form>
+                </div>
+
+                <div id="pay-on-delivery-form" class="form-container">
+                    <h3>Pay on Delivery</h3>
+                    <form id="pay-on-delivery-form-content">
+                        <label for="delivery-address">Delivery Address</label>
+                        <input type="text" id="delivery-address" name="delivery-address" placeholder="542 W. 15th Street" required>
+                        <label for="delivery-city">City</label>
+                        <input type="text" id="delivery-city" name="delivery-city" placeholder="New York" required>
+                        <div>
+                            <h3>Total Amount: <span id="total-amount">$30.00</span></h3>
+                        </div>
+                        <button type="button" onclick="payWithPaystack()" class="btn">Submit Order</button>
+                    </form>
+                </div>                             
+            </div>
+        </div>
+    </section>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartDetails();
+
+    // Populate form when showing the checkout form
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            showForm(this.getAttribute('onclick').includes('checkout') ? 'checkout' : 'delivery');
+        });
+    });
+});
+
+function updateCartDetails() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = 0;
+    let itemCount = cart.length;
+
+    let cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = ''; // Clear existing items
+
+    cart.forEach(item => {
+        total += parseFloat(item.price);
+
+        let itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+            <p>${item.description} - ${item.name} - ${item.color} - $${item.price} </p>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+    });
+
+    document.querySelector('.cart-details .price b').innerText = itemCount;
+    document.querySelector('.cart-details p .price b').innerText = `$${total.toFixed(2)}`;
+    document.getElementById('total-amount').innerText = `$${total.toFixed(2)}`;
+    document.querySelector('#pay-on-delivery-form #total-amount').innerText = `$${total.toFixed(2)}`;
+}
+
+function showForm(formType) {
+    document.getElementById('checkout-form').classList.remove('show');
+    document.getElementById('pay-on-delivery-form').classList.remove('show');
+
+    if (formType === 'checkout') {
+        populateCheckoutForm();
+        document.getElementById('checkout-form').classList.add('show');
+    } else if (formType === 'delivery') {
+        document.getElementById('pay-on-delivery-form').classList.add('show');
+    }
+}
+
+function populateCheckoutForm() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length > 0) {
+        let item = cart[0];
+        document.querySelector('input[name="productName"]').value = item.name;
+        document.querySelector('input[name="productPrice"]').value = item.price;
+        document.querySelector('input[name="productColor"]').value = item.color;
+        document.querySelector('input[name="productDescription"]').value = item.description;
+    }
+}
+
+function payWithPaystack() {
+    let totalAmount = parseFloat(document.getElementById('total-amount').innerText.replace('$', '')) * 100;
+    let email = document.getElementById('email').value;
+
+    let handler = PaystackPop.setup({
+        key: 'pk_test_e77ee04a3320937331b6a7ecb39ac1e5b8878aa8',
+        email: email,
+        amount: totalAmount,
+        currency: 'NGN',
+        ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+        callback: function(response) {
+            let transactionRef = response.reference;
+            submitOrderToServer(transactionRef, 'paystack');
+        },
+        onClose: function() {
+            alert('Transaction was not completed, window closed.');
+        }
+    });
+    handler.openIframe();
+}
+
+function submitOrderToServer(transactionRef, paymentType) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let form = document.querySelector(paymentType === 'paystack' ? '#checkout-form-content' : '#pay-on-delivery-form-content');
+    let formData = new FormData(form);
+    formData.append('transactionRef', transactionRef);
+    formData.append('paymentType', paymentType);
+    formData.append('totalAmount', document.getElementById('total-amount').innerText.replace('$', ''));
+
+    // Loop through cart items and append them to the formData
+    cart.forEach((item, index) => {
+        formData.append(`products[${index}][name]`, item.name);
+        formData.append(`products[${index}][price]`, item.price);
+        formData.append(`products[${index}][color]`, item.color);
+        formData.append(`products[${index}][description]`, item.description);
+    });
+
+    fetch('http://localhost/www/meant/' + (paymentType === 'paystack' ? 'submit_order.php' : 'delivery_order.php'), {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Order submitted successfully!');
+            // Clear the cart
+            localStorage.removeItem('cart');
+
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function submitOrderToServer(transactionRef, paymentType) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let form = document.querySelector(paymentType === 'paystack' ? '#checkout-form-content' : '#pay-on-delivery-form-content');
+    let formData = new FormData(form);
+    formData.append('transactionRef', transactionRef);
+    formData.append('paymentType', paymentType);
+    formData.append('totalAmount', document.getElementById('total-amount').innerText.replace('$', ''));
+
+    // For Pay on Delivery, we are only appending delivery details
+    if (paymentType === 'delivery') {
+        formData.append('deliveryAddress', document.getElementById('delivery-address').value);
+        formData.append('deliveryCity', document.getElementById('delivery-city').value);
+    }
+
+    fetch('http://localhost/www/meant/' + (paymentType === 'paystack' ? 'submit_order.php' : 'delivery_order.php'), {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Order submitted successfully!');
+
+            // Clear the cart
+            localStorage.removeItem('cart');
+
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+    </script>
+</body>
+</html>

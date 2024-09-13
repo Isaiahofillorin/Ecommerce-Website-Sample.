@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnership Registration</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 20px;
+            color: wheat;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: rgb(44, 44, 44);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            border: 1px solid wheat;
+        }
+        h1 {
+            text-align: center;
+            color: #bdbdbd;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: grey;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        .tab.active {
+            background-color:grey;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 90%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            height: 100px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(29, 29, 29);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: grey;
+            transition: ease-in-out 3s;
+        }
+        .btn:active {
+            background-color: grey;
+            transition: ease-in-out 3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Partnership Registration</h1>
+        <div class="tabs">
+            <button class="tab active" onclick="showForm('bike_motorist')">Bike Motorist</button>
+            <button class="tab" onclick="showForm('vendor')">Vendor</button>
+            <button class="tab" onclick="showForm('investor')">Investor</button>
+        </div>
+
+        <!-- Bike Motorist Form -->
+        <div id="bike_motorist" class="form-section active">
+            <h2>Bike Motorist Registration</h2>
+            <form action="https://formsubmit.co/bizt737@gmail.com" method="post">
+                <div class="form-group">
+                    <label for="name_motorist">Name:</label>
+                    <input type="text" id="name_motorist" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_motorist">Email Address:</label>
+                    <input type="email" id="email_motorist" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_motorist">Phone Number:</label>
+                    <input type="tel" id="phone_motorist" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="vehicle">Vehicle Type:</label>
+                    <input type="text" id="vehicle" name="vehicle">
+                </div>
+                <div class="form-group">
+                    <label for="availability">Availability:</label>
+                    <input type="text" id="availability" name="availability">
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience:</label>
+                    <input type="text" id="experience" name="experience">
+                </div>
+                <div class="form-group">
+                    <label for="meeting-date_motorist">Preferred Meeting Date:</label>
+                    <input type="date" id="meeting-date_motorist" name="meeting_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments_motorist">Additional Comments/Questions:</label>
+                    <textarea id="comments_motorist" name="comments"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+
+        <!-- Vendor Form -->
+        <div id="vendor" class="form-section">
+            <h2>Vendor Registration</h2>
+            <form action="https://formsubmit.co/bizt737@gmail.com" method="post">
+                <div class="form-group">
+                    <label for="name_vendor">Name:</label>
+                    <input type="text" id="name_vendor" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_vendor">Email Address:</label>
+                    <input type="email" id="email_vendor" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_vendor">Phone Number:</label>
+                    <input type="tel" id="phone_vendor" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="business-name">Business Name:</label>
+                    <input type="text" id="business-name" name="business_name">
+                </div>
+                <div class="form-group">
+                    <label for="product-categories">Product Categories:</label>
+                    <input type="text" id="product-categories" name="product_categories">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location">
+                </div>
+                <div class="form-group">
+                    <label for="meeting-date_vendor">Preferred Meeting Date:</label>
+                    <input type="date" id="meeting-date_vendor" name="meeting_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments_vendor">Additional Comments/Questions:</label>
+                    <textarea id="comments_vendor" name="comments"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+
+        <!-- Investor Form -->
+        <div id="investor" class="form-section">
+            <h2>Investor Registration</h2>
+            <form action="https://formsubmit.co/bizt737@gmail.com" method="post">
+                <div class="form-group">
+                    <label for="name_investor">Name:</label>
+                    <input type="text" id="name_investor" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_investor">Email Address:</label>
+                    <input type="email" id="email_investor" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_investor">Phone Number:</label>
+                    <input type="tel" id="phone_investor" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="investment-amount">Investment Amount:</label>
+                    <input type="text" id="investment-amount" name="investment_amount">
+                </div>
+                <div class="form-group">
+                    <label for="areas-of-interest">Areas of Interest:</label>
+                    <input type="text" id="areas-of-interest" name="areas_of_interest">
+                </div>
+                <div class="form-group">
+                    <label for="previous-experience">Previous Investment Experience:</label>
+                    <input type="text" id="previous-experience" name="previous_experience">
+                </div>
+                <div class="form-group">
+                    <label for="meeting-date_investor">Preferred Meeting Date:</label>
+                    <input type="date" id="meeting-date_investor" name="meeting_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments_investor">Additional Comments/Questions:</label>
+                    <textarea id="comments_investor" name="comments"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            const sections = document.querySelectorAll('.form-section');
+            const tabs = document.querySelectorAll('.tab');
+
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(formId).classList.add('active');
+            document.querySelector(`.tab[onclick="showForm('${formId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

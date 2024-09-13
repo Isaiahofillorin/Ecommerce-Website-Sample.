@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(70, 68, 68);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .container {
+            text-align: center;
+            background: grey;
+            border-radius: 10px;
+            border: 3px solid bisque;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 600px;
+            height: 200vh;
+        }
+
+        .profile {
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .user-info, .orders-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgb(224, 222, 222);
+            min-width: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: left;
+            margin-top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dropdown-content.visible {
+            display: block;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <a href="flash 1.png"><img src="flash 1.png" alt="Profile Picture"></a>
+        </div>
+        <div id="user-info" class="hidden user-info">
+            <p id="user-id">User ID: </p>
+            <button id="delete-account-button" class="hidden" onclick="handleDeleteAccount()">Delete Account</button>
+        </div>
+        <div id="auth-buttons" class="visible">
+            <button onclick="toggleForm('login')">Login</button>
+            <button onclick="toggleForm('signup')">Sign Up</button>
+        </div>
+        <div id="login-form" class="dropdown-content">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="login-e  mail" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <button type="submit">Login</button>
+                <div id="login-error-message" class="error-message hidden"></div>
+            </form>
+        </div>
+        <div id="signup-form" class="dropdown-content">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="signup-email" required>
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" required>
+                <button type="submit">Sign Up</button>
+                <div id="signup-error-message" class="error-message hidden"></div>
+            </form>
+        </div>
+    </div>
+    <div id="orders-info" class="orders-info hidden">
+        <h2>Pending Orders</h2>
+        <ul id="orders-list">
+            //Orders will be populated here 
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthentication();
+
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                handleLogin(email, password);
+            });
+
+            document.getElementById('signup-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                handleSignup(email, password);
+            });
+        });
+
+        function checkAuthentication() {
+            const token = localStorage.getItem('authToken');
+            const userId = localStorage.getItem('userId');
+
+            // console.log('Token retrieved:', token);
+            // console.log('User ID retrieved:', userId);
+            if (token && userId) {
+                document.getElementById('user-id').textContent = `User ID: ${userId}`;
+                document.getElementById('user-info').classList.remove('hidden');
+                document.getElementById('auth-buttons').classList.add('hidden');
+                document.getElementById('orders-info').classList.remove('hidden');
+                document.getElementById('delete-account-button').classList.remove('hidden');
+                fetchOrders();
+            } else {
+                document.getElementById('user-info').classList.add('hidden');
+                document.getElementById('auth-buttons').classList.remove('hidden');
+                document.getElementById('orders-info').classList.add('hidden');
+                document.getElementById('delete-account-button').classList.add('hidden');
+            }
+        }
+
+        function toggleForm(formType) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            if (formType === 'login') {
+                loginForm.classList.toggle('visible');
+                signupForm.classList.remove('visible');
+            } else if (formType === 'signup') {
+                signupForm.classList.toggle('visible');
+                loginForm.classList.remove('visible');
+            }
+        }
+
+        function handleLogin(email, password) {
+            fetch("login.php", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Login failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // console.log('Data from server:', data);
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userId', email);
+                    // console.log('Token stored:', localStorage.getItem('authToken'));
+                    // console.log('User ID stored:', localStorage.getItem('userId'));
+                    checkAuthentication();
+                    toggleForm('login');
+                    window.location.href = 'index.html';
+                } else {
+                    showError('login', 'Invalid credentials. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('login', 'An error occurred. Please try again.');
+            });
+        }
+
+        function handleSignup(email, password) {
+            fetch("signup.php", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Signup failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // console.log('Data from server:', data);
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userId', email);
+
+                    // console.log('Token stored:', localStorage.getItem('authToken'));
+                    // console.log('User ID stored:', localStorage.getItem('userId'));
+                    document.getElementById('signupForm').reset(); // Clear the form
+                    document.getElementById('signup-error-message').classList.add('hidden');
+                    checkAuthentication();
+                    toggleForm('login');
+                } else {
+                    showError('signup', 'Signup failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('signup', 'An error occurred. Please try again.');
+            });
+        }
+
+        function fetchOrders() {
+            fetch('orders.php', {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const ordersList = document.getElementById('orders-list');
+                ordersList.innerHTML = '';
+                data.orders.forEach(order => {
+                    const li = document.createElement('li');
+                    li.textContent = `Order #${order.id} - ${order.status}`;
+                    ordersList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Unable to fetch orders.');
+            });
+        }
+
+        function showError(formType, message) {
+            const errorMessageElement = document.getElementById(`${formType}-error-message`);
+            errorMessageElement.textContent = message;
+            errorMessageElement.classList.remove('hidden');
+        }
+
+        function handleDeleteAccount() {
+            const token = localStorage.getItem('authToken');
+            const userId = localStorage.getItem('userId');
+
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                fetch('http://localhost/www/meant/delete', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ userId })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete account');
+                    }
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('userId');
+                    checkAuthentication();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+

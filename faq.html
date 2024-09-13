@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Frequently Asked Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background:  rgb(233, 233, 233);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            background-color: #f9f9f9;
+        }
+
+        .faq-answer.visible {
+            display: block;
+        }
+
+        .faq-item:last-of-type {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="display: block; text-align: center;">
+            <img src="Blue and White Circle Retail Logo_20240617_022725_0000.png" alt="BizT logo" style=" height: 200px; color: white; padding: 40px 10px 0px 10px">
+        </div>
+        <h1 style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">BiZT Frequently Asked Questions (FAQ)</h1>
+
+        <div class="faq-item">
+            <button class="faq-question">What is your return policy?</button>
+            <div class="faq-answer">
+                <p>We accept returns within 3-5 working days of purchase. Items must be in their original condition and packaging. Please visit our <a href="returnpolicy.html">Returns Policy</a> page for more details.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How can I track my order?</button>
+            <div class="faq-answer">
+                <p>Once your order has shipped, you will receive an email with a tracking number and a link to track your shipment. You can also track your order by logging into your account on our website.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">What payment methods do you accept?</button>
+            <div class="faq-answer">
+                <p>We accept various payment methods, including credit/debit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. You can choose your preferred payment method at checkout.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How do I change or cancel my order?</button>
+            <div class="faq-answer">
+                <p>If you need to change or cancel your order, please contact our customer service team as soon as possible. We can only make changes to orders that have not yet been processed or shipped.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Do you offer international shipping?</button>
+            <div class="faq-answer">
+                <p>Yes, we offer shipping services in nigeria only(E-commerce limited to nigeria.). Shipping fees and delivery times vary depending on your location.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How can I contact customer support?</button>
+            <div class="faq-answer">
+                <p>You can reach our customer support team by emailing <a href="biztsupport@gmail.com">biztsupport@gmail.com</a> or using the contact form on our <a href="about.html">About Us</a> page. Our team is available to assist you with any questions or issues you may have.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How do I create an account?</button>
+            <div class="faq-answer">
+                <p>To create an account, click on the "account" button at the home page and follow the prompts to enter your details. You will receive a confirmation email once your account is created.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Can I change my shipping address after placing an order?</button>
+            <div class="faq-answer">
+                <p>If you need to change your shipping address, please contact our customer service team immediately. We can only update the address if the order has not yet been processed or shipped.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    answer.classList.toggle('visible');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

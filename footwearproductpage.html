@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foot wear product page</title>
+    <style>
+        * {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif; background-color: #c0c0c0;  }
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  margin: auto;
+}
+#opt{
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
+}
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 2px;
+  background-color: #bbb;
+  display: inline-block;
+  border-radius: 50%;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+.button{
+            width: 40%;
+            height: 40px;
+            background-color: rgb(66, 66, 66);
+            border-radius: 10px;
+            margin: 35px 35px 0px 35px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: medium;
+            color: white;
+            cursor: pointer;
+        }
+        .button:hover{
+            background-color: green;
+            width:40.5% ;
+            height: 43px;
+        }
+        .button:active{
+            opacity: 0.7;
+        }
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+.card {
+  box-shadow: 0 8px 12px 4px rgba(0, 0, 0, 0.2);
+  max-width: 150px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  flex-direction: row;
+}
+
+.price {
+  color: grey;
+  font-size: 18px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+  transition: opacity ease-in-out 2S;
+}
+.span{
+  color: antiquewhite;
+  font-weight: 600;
+}
+.introt{
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 1000;
+  word-spacing: 5px;
+}
+.color-picker {
+    text-align: center;
+}
+
+.color-options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#color-swatch {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+.selected-color-bar {
+    width: 100%;
+    height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+.rating-container {
+    text-align: center;
+}
+
+.star-rating {
+    font-size: 2em; /* Adjust the size of the stars */
+    color: #d3d3d3; /* Default star color */
+    cursor: pointer;
+}
+
+.star-rating .star {
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.star-rating .star.hover,
+.star-rating .star.selected {
+    color: gold; /* Highlighted star color */
+}
+
+#rating-display {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+#saved-rating {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333; /* Text color for saved rating */
+}
+
+.comment-section {
+    margin-top: 20px;
+}
+
+#comment-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#submit-comment {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+#submit-comment:hover {
+    background-color: #218838;
+}
+
+#comments-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#comments-list h3 {
+    margin-bottom: 10px;
+}
+
+#comments {
+    list-style-type: none;
+    padding: 0;
+}
+
+#comments li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* deleting comments and rating */
+#remove-rating {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+#remove-rating:hover {
+    background-color: #c82333;
+}
+
+#comments-list ul li button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+
+
+/* Add this to your existing CSS */
+#comments-list ul li {
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#comments-list ul li button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+#comments-list ul li button:hover {
+    color: #c82333;
+}
+
+    </style>
+</head>
+<body>
+    <section style="display: flex;">
+        <div style="flex-direction: column; margin: auto; flex: 50%; text-align: center;">
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <a href="flash 1.png" id=""><img src="flash 1.png" style="width:80%;  height: 200px;"></a>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <a href="flash 2.png" id=""><img src="flash 2.png" style="width:80%;  height: 200px;"></a>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <a href="flash 3.png" id=""><img src="flash 3.png" style="width:80%;  height: 200px;"></a>
+                </div>
+                </div>
+                <div style="text-align:center;">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+        </div>
+        <form style="flex-direction: column; text-align: center; flex: 30%;">
+            <p style="color:black;">Product Info</p>
+            <hr>
+            <div style="border-radius: 6px; color: black; font-size: medium;">
+                <p style="color: white; font-weight: 700;  font-family: 'Courier New', Courier, monospace;" id="">Product
+                    <span style=" color:  #3b3838;">Foot wears</span>
+                </p>
+                <hr>
+                <p style="color: white; font-weight: 700;  font-family: 'Courier New', Courier, monospace;" id="">
+                select color
+                <div class="color-picker">
+                    <div class="color-options">
+                        <div id="color-swatch" class="color-swatch" style="background-color: black;" data-color="#ff0000"></div>
+                        <div id="color-swatch" class="color-swatch" style="background-color: #00ff00;" data-color="#00ff00"></div>
+                        <div id="color-swatch" class="color-swatch" style="background-color: #0000ff;" data-color="#0000ff"></div>
+                        <div id="color-swatch" class="color-swatch" style="background-color: #ffff00;" data-color="#ffff00"></div>
+                    </div>
+                    <div class="selected-color-bar" id="selectedColorBar"></div>
+                    <input type="hidden" id="selectedColorInput" name="selectedColor">
+                </div>
+                </p>
+                <hr>
+                <p style="color: white; font-weight: 700;  font-family: 'Courier New', Courier, monospace;" id="">size
+                    <span style=" color: #3b3838;">
+                        <select style="color: white; background-color: #3b3838; padding: 10px 20px 10px 20px;">
+                            <option id="opt">45</option>
+                            <option id="opt">35</option>
+                            <option id="opt">55</option>
+                            <option id="opt">23</option>
+
+                        </select>
+                    </span>
+                </p>
+                <p style="color: white;  font-weight: 700; font-family: 'Courier New', Courier, monospace;">Vendor
+                    <span style=" color: #575454;"> VC Suits</span>
+                </p>
+                <p style="color: white;  font-weight: 1000; font-family: 'Courier New', Courier, monospace;">Price
+                    <span style=" color: #575454;" id="price">$40</span>
+                    <hr>
+                </p>
+            </div>
+        </form>
+    </section>
+    <section style="background-color: white; border-radius: 6px; text-align: center;">
+        <h2 class="introt"><b>Product Info......</b><hr></h2>
+        <p style="padding-bottom: 10px;" id="description">Text Describing more on this product Text Describing more on this product
+        </p>
+    </section>
+
+    <div class="rating-container">
+        <div class="star-rating">
+            <span data-value="1" class="star">&#9733;</span>
+            <span data-value="2" class="star">&#9733;</span>
+            <span data-value="3" class="star">&#9733;</span>
+            <span data-value="4" class="star">&#9733;</span>
+            <span data-value="5" class="star">&#9733;</span>
+        </div>
+        <p id="rating-display">Rating: 0</p>
+        <p id="saved-rating">Saved Rating: None</p>
+        <button id="remove-rating" style="display: none;">Remove Rating</button>
+
+        <div class="comment-section">
+        <textarea id="comment-input" placeholder="Write your comment here..."></textarea>
+        <button id="submit-comment">Submit Comment</button>
+        <div id="comments-list">
+            <h3>Comments:</h3>
+            <ul id="comments"></ul>
+        </div>
+    </div>
+    </div>
+
+
+    <section>
+    <div style="text-align: center;">
+        <a href="cart.html" onclick="addToCart()" ><button class="button">Add to Cart</button></a>
+    </div>
+    </section>
+    <section>
+        <!------RELATED PRODUCTS------->
+    <h2 class="introt" style="background-color: #717171; color: white;"
+    >Related Products</h2>
+<div style="overflow: auto; white-space: nowrap; margin: auto;">
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+</div>
+<p></p>
+<div style="overflow: auto; white-space: nowrap; margin: auto;">
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+    <div class="card" style="display: inline-block; font-size: small; margin-right: 6px;">
+    <img src="flash 2.png" alt="Denim Jeans" style="width:100%">
+    <h3>Tailored Jeans</h>
+    <p class="price" style="text-decoration: line-through;">$19.99</p>
+    <p class="price" style="color: #000;">$10.02</p>
+    <p></p>
+    <a href="footwearproductpage.html"><button id="" >Buy Now</button></a>
+    </div>
+</div>
+<p></p>
+</div>
+    </section>
+
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 7000); // Change image every 7 seconds
+}
+
+// Color picker
+document.addEventListener('DOMContentLoaded', () => {
+    const colorSwatches = document.querySelectorAll('.color-swatch');
+    const selectedColorBar = document.getElementById('selectedColorBar');
+
+    colorSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            const color = swatch.getAttribute('data-color');
+            console.log(`Selected color: ${color}`); // Debugging line
+            selectedColorBar.style.backgroundColor = color;
+            selectedColorInput.value = color;
+            // Update the color display element's background color
+            selectedColorBar.style.backgroundColor = color;
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    const ratingDisplay = document.getElementById('rating-display');
+    const savedRatingDisplay = document.getElementById('saved-rating');
+    const removeRatingButton = document.getElementById('remove-rating');
+    const commentInput = document.getElementById('comment-input');
+    const submitCommentButton = document.getElementById('submit-comment');
+    const commentsList = document.getElementById('comments');
+
+    // Replace this with the current user's unique ID
+    const currentUserId = 'user123'; 
+
+    let rating = 0;
+    let ratingSaved = false;
+
+    // Load saved comments and rating from local storage
+    loadComments();
+    loadRating();
+
+    // Handle star rating functionality
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            if (!ratingSaved) {
+                const value = parseInt(star.getAttribute('data-value'));
+                highlightStars(value);
+            }
+        });
+
+        star.addEventListener('mouseout', () => {
+            if (!ratingSaved) {
+                highlightStars(rating);
+            }
+        });
+
+        star.addEventListener('click', () => {
+            if (!ratingSaved) {
+                rating = parseInt(star.getAttribute('data-value'));
+                updateRatingDisplay(rating);
+                saveRating(rating);
+            }
+        });
+    });
+
+    function highlightStars(max) {
+        stars.forEach(star => {
+            const value = parseInt(star.getAttribute('data-value'));
+            star.classList.toggle('hover', value <= max);
+        });
+    }
+
+    function updateRatingDisplay(rating) {
+        ratingDisplay.textContent = `Rating: ${rating}`;
+        stars.forEach(star => {
+            const value = parseInt(star.getAttribute('data-value'));
+            star.classList.toggle('selected', value <= rating);
+        });
+    }
+
+    function saveRating(rating) {
+        ratingSaved = true; // Mark rating as saved
+        savedRatingDisplay.textContent = `Saved Rating: ${rating}`;
+        removeRatingButton.style.display = 'inline-block'; // Show remove button
+        stars.forEach(star => {
+            star.removeEventListener('mouseover', handleMouseOver);
+            star.removeEventListener('mouseout', handleMouseOut);
+            star.removeEventListener('click', handleClick);
+        });
+        localStorage.setItem('savedRating', rating); // Save rating to local storage
+    }
+
+    function loadRating() {
+        const savedRating = localStorage.getItem('savedRating');
+        if (savedRating) {
+            rating = parseInt(savedRating);
+            updateRatingDisplay(rating);
+            saveRating(rating); // Reapply saved rating
+        }
+    }
+
+    function handleMouseOver() {
+        const value = parseInt(this.getAttribute('data-value'));
+        highlightStars(value);
+    }
+
+    function handleMouseOut() {
+        highlightStars(rating);
+    }
+
+    function handleClick() {
+        rating = parseInt(this.getAttribute('data-value'));
+        updateRatingDisplay(rating);
+        saveRating(rating);
+    }
+
+    // Handle comment submission
+    submitCommentButton.addEventListener('click', () => {
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            addComment(commentText, currentUserId);
+            saveComments(); // Save comments to local storage
+            commentInput.value = ''; // Clear the input after submission
+        }
+    });
+
+    function addComment(comment, userId) {
+        const listItem = document.createElement('li');
+        listItem.textContent = comment;
+        
+        // Create and add a delete button to the comment
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                listItem.remove(); // Remove comment from the UI
+                saveComments(); // Update comments in local storage
+            }
+        });
+
+        listItem.appendChild(deleteButton);
+        commentsList.appendChild(listItem);
+    }
+
+    function saveComments() {
+        const comments = [];
+        commentsList.querySelectorAll('li').forEach(li => {
+            const commentText = li.textContent.replace('Delete', '').trim();
+            comments.push({ text: commentText, userId: currentUserId });
+        });
+        localStorage.setItem('comments', JSON.stringify(comments)); // Save comments to local storage
+    }
+
+    function loadComments() {
+        const savedComments = JSON.parse(localStorage.getItem('comments')) || [];
+        savedComments.forEach(comment => {
+            if (comment.userId === currentUserId) {
+                addComment(comment.text, comment.userId);
+            }
+        });
+    }
+
+    // Remove rating button functionality
+    removeRatingButton.addEventListener('click', () => {
+        localStorage.removeItem('savedRating');
+        savedRatingDisplay.textContent = 'Saved Rating: None';
+        rating = 0;
+        ratingSaved = false;
+        removeRatingButton.style.display = 'none'; // Hide remove button
+        updateRatingDisplay(rating); // Reset rating display
+        stars.forEach(star => star.classList.remove('selected')); // Remove selected stars
+    });
+});
+
+function addToCart() {
+    // Get product details
+    const productName = document.getElementById('product-name').innerText;
+    const productPrice = document.getElementById('product-price').innerText.replace('$', ''); // Remove the $ sign
+    const productColor = document.getElementById('product-color').innerText.split(': ')[1]; // Get the color
+
+    // Prepare the product object
+    const product = {
+        name: productName,
+        price: productPrice,
+        color: productColor
+    };
+
+    // Retrieve existing cart data from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Add the new product to the cart
+    cart.push(product);
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Redirect to the cart page if needed
+    window.location.href = 'cart.html';
+}function addToCart() {
+    // Get product details
+    const productDescription = document.getElementById('description').innerText;
+    const productName = document.getElementById('opt').innerText;
+    const productPrice = document.getElementById('price').innerText.replace('$', ''); // Remove the $ sign
+    const productColor = document.getElementById('selectedColorInput').value //.split (': ')[1]; // Get the color
+
+    // Prepare the product object
+    const product = {
+        name: productName,
+        price: productPrice,
+        color: productColor,
+        description: productDescription
+    };
+
+    // Retrieve existing cart data from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Add the new product to the cart
+    cart.push(product);
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Redirect to the cart page if needed
+    window.location.href = 'cart.html';
+}
+</script>
+</body>
+</html>
